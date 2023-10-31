@@ -55,9 +55,11 @@ public class UserServiceImpl implements UserService{
         String password = user.getPassword();
         User byEmailAndPassword = userRepository.findByEmailAndPassword(email, password);
         if(byEmailAndPassword!=null){
+            session.setAttribute("loginId",byEmailAndPassword.getUser_id());
+            session.setAttribute("loginRole",byEmailAndPassword.getRole());
             session.setAttribute("username",email);
             session.setAttribute("password",password);
-            session.setAttribute("userEmail",email);
+            session.setAttribute("userEmail",byEmailAndPassword.getEmail());
             return byEmailAndPassword;
         }else{
             return null;
@@ -161,6 +163,7 @@ public class UserServiceImpl implements UserService{
         String password = (String) session.getAttribute("password");
         User byEmailAndPassword = userRepository.findByEmailAndPassword(username, password);
         if(byEmailAndPassword!=null){
+            session.setAttribute("userEmail",byEmailAndPassword.getEmail());
             return byEmailAndPassword;
         }else{
             return null;
@@ -172,4 +175,10 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
+
+    @Override
+    public void logout() {
+        session.removeAttribute("username");
+        session.invalidate();
+    }
 }

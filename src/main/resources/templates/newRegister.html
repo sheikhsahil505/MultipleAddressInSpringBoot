@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head th:insert="header :: head">
 
-<head>
+</head>
+<body>
 
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
-
-
-<style type="text/css">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<style>
 
     .card {
         margin-bottom: 30px;
@@ -77,11 +77,6 @@
     }
 
 </style>
-</head>
-<body>
-
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
 
 
   <form action="SaveUser" method="post"  id="myForm"   >
@@ -151,29 +146,29 @@
                                 <div class="address">
                           <div class="row">
             <div class="col-lg-1 mb-3">
-                <label for="street">Street:</label>
+                <label>Street:</label>
                 <input type="text"    name="street" required>
             </div>
             <div class="col-lg-1 mb-3">
-                <label for="apartment">Apartment:</label>
+                <label>Apartment:</label>
                 <input type="text"   name="apartment" required>
             </div>
             <div class="col-lg-1 mb-3">
-                <label for="city">City:</label>
+                <label>City:</label>
                 <input type="text" name="city" required>
             </div>
            <div class="col-lg-1 mb-3">
-               <label for="pincode">PinCode:</label>
+               <label>PinCode:</label>
                <input type="text" id="pincode0" name="pincode"  required onblur="validateFirstAddressPincode();">
                <span id="pincodeError0" style="color: red"></span>
            </div>
 
             <div class="col-lg-1 mb-3">
-                <label for="state">State:</label>
+                <label>State:</label>
                 <input type="text"   name="state"  required>
             </div>
             <div class="col-lg-1 mb-3">
-                <label for="country">Country:</label>
+                <label>Country:</label>
                 <input type="text"   name="country"  required>
             </div>
 
@@ -585,9 +580,6 @@ function validateFirstAddressPincode() {
       document.querySelector("form").addEventListener("submit", validateForm);
 
   </script>
-
-
-
-
 </body>
+<div th:insert="footer :: foot"></div>
 </html>

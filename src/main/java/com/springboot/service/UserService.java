@@ -24,4 +24,5 @@ public interface UserService {
     User home();
 
     void deleteUser(long id);
+    void logout();
 }

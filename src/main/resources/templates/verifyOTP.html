@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 
-<head>
+<head th:insert="header :: head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar with Logo and Login/Signup</title>
@@ -21,7 +21,7 @@
      <div class="container py-2">
        <div class="row d-flex justify-content-center align-items-center h-100">
          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-           <div class="card      text-white" style="border-radius: 1rem;">
+           <div class="card      text-white"  style="border-radius: 1rem;  background-color: #343a40;">
              <div class="card-body p-3 text-center">
 
                <div class=" ">

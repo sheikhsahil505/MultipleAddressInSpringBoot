@@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:insert="header :: head">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
     <title>Edit Profile</title>
-    <style>
 
-
-        .profile-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .profile-name {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .profile-info {
-            font-size: 0.9rem;
-            color: #777;
-        }
-
-        .card {
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"] {
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button[type="button"] {
-            border: none;
-            padding: 8px 16px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .address {
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        .address label {
-            margin-bottom: 0;
-        }
-
-        .address input[type="text"] {
-            margin-bottom: 5px;
-        }
-
-        .address:last-child {
-            margin-bottom: 0;
-        }
-    </style>
 </head>
 <body>
+<style>
+
+
+    .profile-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .profile-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .profile-info {
+        font-size: 0.9rem;
+        color: #777;
+    }
+
+    .card {
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button[type="button"] {
+        border: none;
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .address {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+
+    .address label {
+        margin-bottom: 0;
+    }
+
+    .address input[type="text"] {
+        margin-bottom: 5px;
+    }
+
+    .address:last-child {
+        margin-bottom: 0;
+    }
+</style>
 <form th:action="@{/saveUpdateUser}" method="post">
 
     <a class="btn btn-danger btn-md" type="button" th:href="@{/logout}" style="position: absolute; top: 0; right: 0; margin: 1rem;">Logout</a>
@@ -89,7 +90,7 @@
     <div class="container mt-4">
         <div th:if="${profile}">
             <div th:each="profiles : ${profile}">
-                <input type="hidden" name="user_id" th:value="${profiles.user_id}" />
+                <input type="hidden" name="user_id" th:value="${profiles.user_id}" id="currentId" th:attr="data-role=${profile.user_id}"/>
 
                 <h1 class="text-center " th:text="${profiles.first_name} + ' ' + ${profiles.last_name}"></h1>
                 <div class="card profile-card mb-5">
@@ -129,7 +130,9 @@
                         <input type="date" class="form-control" id="dob" name="dob" th:value="${profiles.dob}">
                         <h5 id="dob1" style="color: red; display: none;"></h5>
                     </div>
-
+                    <div th:if="${errorMessage}" class="alert alert-danger">
+                        <span th:text="${errorMessage}"></span>
+                    </div>
                     <div class="container mt-5">
                         <div class="row">
                             <div class="col-lg-12">
@@ -180,8 +183,29 @@
             </div>
         </div>
     </div>
+
 </form>
-    <script>
+<script>
+
+        var loginId = [[${#httpSession.getAttribute('loginId')}]]
+        var loginRole = "[[${#httpSession.getAttribute('loginRole')}]]"
+        var currentId = document.getElementById("currentId").getAttribute("data-role");
+
+         var emailField = document.getElementById("emailField");
+         var roleField = document.getElementById("roleField");
+
+        if (loginRole === "admin" && loginId != currentId) {
+         console.log(currentId);
+         console.log(loginId);
+            emailField.removeAttribute("readonly");
+            roleField.removeAttribute("readonly");
+        } else {
+         console.log("else");
+            emailField.setAttribute("readonly", "readonly");
+            roleField.setAttribute("readonly", "readonly");
+        }
+
+
         var removedAddressIds = [];
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -380,7 +404,9 @@
     }
 
     document.getElementById("emailField").addEventListener('change', ValidateEmail);
+
 </script>
 
    </body>
+<div th:insert="footer :: foot"></div>
 </html>

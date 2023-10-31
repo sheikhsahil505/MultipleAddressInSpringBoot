@@ -64,41 +64,54 @@ public class UserController {
     }
     @PostMapping(value = "/viewUser")
     public String viewMoreUser(@RequestParam("user_id") int id, Model model, HttpSession session) {
-        User user = userService.getUserById(id);
-        session.setAttribute("userEmail",user.getEmail());
-        List<User> all = userService.findAll();
-        List<Address> allAddressByUser = userService.findAllAddressByUser(user);
-        model.addAttribute("addresses",allAddressByUser);
-        model.addAttribute("registrations",all);
-        model.addAttribute("profile",user);
+        if(session.getAttribute("username")!=null) {
+            User user = userService.getUserById(id);
+            session.setAttribute("userEmail", user.getEmail());
+            List<User> all = userService.findAll();
+            List<Address> allAddressByUser = userService.findAllAddressByUser(user);
+            model.addAttribute("addresses", allAddressByUser);
+            model.addAttribute("registrations", all);
+            model.addAttribute("profile", user);
             return "view";
+        }else{
+            return "index";
+        }
     }
 
     @PostMapping(value = "/UpdateProfile")
     public String updateUser(@RequestParam("user_id") long id, Model model) {
-        User user = userService.getUserById(id);
-        List<Address> allAddressByUserId = userService.findAllAddressByUser(user);
-        model.addAttribute("profile", user);
-        model.addAttribute("addresses", allAddressByUserId);
-        return "updateProfile";
+        if(session.getAttribute("username")!=null) {
+            User user = userService.getUserById(id);
+            List<Address> allAddressByUserId = userService.findAllAddressByUser(user);
+            model.addAttribute("profile", user);
+            model.addAttribute("addresses", allAddressByUserId);
+            return "updateProfile";
+        }else {
+            return "index";
+        }
     }
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String home( HttpSession session,Model model) {
-        User home = userService.home();
-        if(home!=null){
-            List<User> all = userService.findAll();
-            List<Address> allAddressByUser = userService.findAllAddressByUser(home);
-            model.addAttribute("addresses",allAddressByUser);
-            model.addAttribute("registrations",all);
-            model.addAttribute("profile",home);
-            return "view";
+    public String home(Model model) {
+        if(session.getAttribute("username")!=null) {
+            User home = userService.home();
+            if (home != null) {
+                List<User> all = userService.findAll();
+                List<Address> allAddressByUser = userService.findAllAddressByUser(home);
+                model.addAttribute("addresses", allAddressByUser);
+                model.addAttribute("registrations", all);
+                model.addAttribute("profile", home);
+                return "view";
             }
-        return null;
+            return null;
+        }else {
+            return "index";
+        }
     }
 
     @PostMapping(value = "/saveUpdateUser")
     public String updateProfile(@RequestParam("removedAddressIds") String addressDeleteIds, User user,Address address, HttpSession session, Model model) {
+        if(session.getAttribute("username")!=null){
             long id = user.getUser_id();
             boolean status = userService.updateUser(user, address);
             if (status) {
@@ -118,10 +131,13 @@ public class UserController {
                 model.addAttribute("registrations", allUsers);
                 return "view";
             }
+            } else{
+            return "index";
+            }
 }
-
     @PostMapping(value = "/deleteUser")
     public String deleteUSer(@RequestParam("user_id") long id, Model model){
+        if(session.getAttribute("username")!=null){
         userService.deleteUser(id);
         User home = userService.home();
         if(home!=null){
@@ -132,6 +148,14 @@ public class UserController {
             model.addAttribute("profile",home);
             return "view";
         }
-        return null;
+        return null;}
+        else {
+            return "index";
+        }
+    }
+    @GetMapping(value = "/logout")
+    public String logout(){
+        userService.logout();
+        return "index";
     }
 }
