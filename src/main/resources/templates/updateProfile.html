@@ -404,9 +404,57 @@
     }
 
     document.getElementById("emailField").addEventListener('change', ValidateEmail);
+      function validateForm(event) {
+
+                     if (!firstNameValidation()) {
+                         alert("Please enter a valid first name.");
+                         event.preventDefault();
+                         return false;
+                     }
+
+                     if (!lastNameValidation()) {
+                         alert("Please enter a valid last name.");
+                         event.preventDefault();
+                         return false;
+                     }
+
+
+
+                     if (!ValidateContact()) {
+                         alert("Please enter a valid contact number.");
+                         event.preventDefault();
+                         return false;
+                     }
+
+
+                       if (!validateDOB()) {
+                         alert("Birthday date should be less then today.");
+                         event.preventDefault();
+                         return false;
+                         }
+
+                                   if (!ValidateEmail()) {
+                                       alert("Please enter a valid email.");
+                                       event.preventDefault();
+                                       return false;
+                                   }
+
+
+                          for (var i = 0; i < addressIndex; i++) {
+                              if (!validatePincode(i)) {
+                                  alert("Pin code is not correct for address " + (i + 1));
+                                  event.preventDefault();
+                                  return false;
+                              }
+                          }
+
+
+                     return true;
+                 }
+
+                 document.querySelector("form").addEventListener("submit", validateForm);
 
 </script>
-
    </body>
 <div th:insert="footer :: foot"></div>
 </html>
