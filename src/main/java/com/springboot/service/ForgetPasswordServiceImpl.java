@@ -44,7 +44,18 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService{
         User byEmail = userRepository.findByEmail(email);
         byEmail.setPassword(newPassword);
         userRepository.save(byEmail);
+        session.invalidate();
+    }
 
+    @Override
+    public boolean verifyOtp(String otp) {
+        int otpValue = Integer.parseInt(otp);
+        int otp1 =(int) session.getAttribute("otp");
+        if(otpValue==otp1){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

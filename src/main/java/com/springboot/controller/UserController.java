@@ -20,6 +20,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private HttpSession session;
+    private   Model model;
     @GetMapping("/view")
     public String viewPage(){return "index";}
     @GetMapping("/loginBtn")
@@ -91,26 +92,24 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String home(Model model) {
+    @GetMapping(value = "/home")
+    public String home( Model model) {
         if(session.getAttribute("username")!=null) {
             User home = userService.home();
-            if (home != null) {
                 List<User> all = userService.findAll();
                 List<Address> allAddressByUser = userService.findAllAddressByUser(home);
                 model.addAttribute("addresses", allAddressByUser);
                 model.addAttribute("registrations", all);
                 model.addAttribute("profile", home);
-                return "view";
-            }
-            return null;
+
+            return "view";
         }else {
             return "index";
         }
     }
 
     @PostMapping(value = "/saveUpdateUser")
-    public String updateProfile(@RequestParam("removedAddressIds") String addressDeleteIds, User user,Address address, HttpSession session, Model model) {
+    public String updateProfile(@RequestParam("removedAddressIds") String addressDeleteIds, User user,Address address) {
         if(session.getAttribute("username")!=null){
             long id = user.getUser_id();
             boolean status = userService.updateUser(user, address);
@@ -136,20 +135,17 @@ public class UserController {
             }
 }
     @PostMapping(value = "/deleteUser")
-    public String deleteUSer(@RequestParam("user_id") long id, Model model){
+    public String deleteUSer(@RequestParam("user_id") long id){
         if(session.getAttribute("username")!=null){
-        userService.deleteUser(id);
-        User home = userService.home();
-        if(home!=null){
+            userService.deleteUser(id);
+            User home = userService.home();
             List<User> all = userService.findAll();
             List<Address> allAddressByUser = userService.findAllAddressByUser(home);
             model.addAttribute("addresses",allAddressByUser);
             model.addAttribute("registrations",all);
             model.addAttribute("profile",home);
             return "view";
-        }
-        return null;}
-        else {
+        } else {
             return "index";
         }
     }
