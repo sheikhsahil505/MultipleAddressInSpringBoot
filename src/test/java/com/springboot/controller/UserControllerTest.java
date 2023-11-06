@@ -229,6 +229,41 @@ public class UserControllerTest {
         assertEquals("view", viewName);
     }
 
+
+
+    @Test
+    public void testUpdateProfileEmailTaken() {
+//        // Arrange
+//        User user = new User(); // Create a User object
+//        Address address = new Address(); // Create an Address object
+        when(session.getAttribute("username")).thenReturn("testUsername");
+        when(userService.updateUser(user, address)).thenReturn(true);
+
+        // Act
+        String result = userController.updateProfile("1,2,3", user, address);
+
+        assertEquals("updateProfile", result);
+        verify(model).addAttribute(eq("errorMessage"), eq("Email is already taken."));
+
+
+    }
+
+    @Test
+    public void testUpdateProfileEmailNotTaken() {
+
+        when(session.getAttribute("username")).thenReturn("testUsername");
+        when(userService.updateUser(user, address)).thenReturn(false);
+
+
+        String result = userController.updateProfile("1,2,3", user, address);
+        assertEquals("view", result);
+
+
+    }
+
+
+
+
     @Test
     public void logout() {
         doNothing().when(userService).logout();

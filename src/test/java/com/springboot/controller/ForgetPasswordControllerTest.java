@@ -15,6 +15,7 @@ import static org.mockito.Mockito.*;
 class ForgetPasswordControllerTest {
     ForgetPasswordService forgetPasswordService = mock(ForgetPasswordService.class);
     Model model = mock(Model.class);
+
     @Test
     public void testSentOTP_ValidEmailAndDOB_ReturnsVerifyOTP() {
         ForgetPasswordController forgetPasswordController = new ForgetPasswordController(forgetPasswordService,model);
