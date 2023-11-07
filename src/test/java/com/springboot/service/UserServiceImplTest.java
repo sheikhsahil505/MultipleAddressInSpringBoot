@@ -44,7 +44,6 @@ public class UserServiceImplTest {
 
     @Test
     public void testSaveUser() {
-        User user = new User();
         user.setEmail("test@example.com");
 
         Address address = new Address();
@@ -95,7 +94,6 @@ public class UserServiceImplTest {
 
     @Test
     public void testFindAllAddressByUser() {
-        User user = new User();
         user.setUser_id(1L); // Replace with a valid user ID
         List<Address> addresses = new ArrayList<>();
 
@@ -110,7 +108,6 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetUserById() {
-        User user = new User();
         user.setUser_id(1L); // Replace with a valid user ID
 
         // Mocking UserRepository behavior
@@ -165,7 +162,6 @@ public class UserServiceImplTest {
 
     @Test
     public void testHome() {
-        User user = new User();
         String username = "test@example.com";
         String password = "password";
 
