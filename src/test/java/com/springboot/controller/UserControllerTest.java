@@ -170,7 +170,7 @@ public class UserControllerTest {
     @Test
     public void testUpdateProfileInvalidSession() {
         when(session.getAttribute("username")).thenReturn(null);
-        String viewName = userController.updateProfile("addressDeleteIds", user, address);
+        String viewName = userController.updateProfile("addressDeleteIds", user, address,model);
         assertEquals("index", viewName);
         verify(session, times(1)).getAttribute("username");
     }
@@ -240,7 +240,7 @@ public class UserControllerTest {
         when(userService.updateUser(user, address)).thenReturn(true);
 
         // Act
-        String result = userController.updateProfile("1,2,3", user, address);
+        String result = userController.updateProfile("1,2,3", user, address,model);
 
         assertEquals("updateProfile", result);
         verify(model).addAttribute(eq("errorMessage"), eq("Email is already taken."));
@@ -255,7 +255,7 @@ public class UserControllerTest {
         when(userService.updateUser(user, address)).thenReturn(false);
 
 
-        String result = userController.updateProfile("1,2,3", user, address);
+        String result = userController.updateProfile("1,2,3", user, address,model);
         assertEquals("view", result);
 
 

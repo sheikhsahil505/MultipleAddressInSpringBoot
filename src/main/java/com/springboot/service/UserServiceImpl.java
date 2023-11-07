@@ -19,36 +19,36 @@ public class UserServiceImpl implements UserService{
     private HttpSession session;
     @Autowired
     private AddressRepository addressRepository;
-    @Override
-    public boolean saveUser(User user, Address address) {
-        String email = user.getEmail();
-        User byEmail = userRepository.findByEmail(email);
-        if(byEmail==null){
-        userRepository.save(user);
-        String[] street = address.getStreet().split(",");
-        String[] apartment = address.getApartment().split(",");
-        String[] city = address.getCity().split(",");
-        String[] state = address.getState().split(",");
-        String[] country = address.getCountry().split(",");
-        String[] pincode = address.getPincode().split(",");
-        if (street != null && street.length > 0) {
-            for (int i = 0; i < street.length; i++) {
-                Address address1 = new Address();
-                address1.setStreet(street[i]);
-                address1.setApartment(apartment[i]);
-                address1.setPincode(pincode[i]);
-                address1.setState(state[i]);
-                address1.setCity(city[i]);
-                address1.setCountry(country[i]);
-                address1.setUser(user);
-                addressRepository.save(address1);
+        @Override
+        public boolean saveUser(User user, Address address) {
+            String email = user.getEmail();
+            User byEmail = userRepository.findByEmail(email);
+            if(byEmail==null){
+            userRepository.save(user);
+            String[] street = address.getStreet().split(",");
+            String[] apartment = address.getApartment().split(",");
+            String[] city = address.getCity().split(",");
+            String[] state = address.getState().split(",");
+            String[] country = address.getCountry().split(",");
+            String[] pincode = address.getPincode().split(",");
+            if (street != null && street.length > 0) {
+                for (int i = 0; i < street.length; i++) {
+                    Address address1 = new Address();
+                    address1.setStreet(street[i]);
+                    address1.setApartment(apartment[i]);
+                    address1.setPincode(pincode[i]);
+                    address1.setState(state[i]);
+                    address1.setCity(city[i]);
+                    address1.setCountry(country[i]);
+                    address1.setUser(user);
+                    addressRepository.save(address1);
+                }
+            }
+            return false;
+            }else{
+                return true;
             }
         }
-        return false;
-        }else{
-            return true;
-        }
-    }
     @Override
     public User login(User user) {
         String email = user.getEmail();
@@ -60,10 +60,8 @@ public class UserServiceImpl implements UserService{
             session.setAttribute("username",email);
             session.setAttribute("password",password);
             session.setAttribute("userEmail",byEmailAndPassword.getEmail());
-            return byEmailAndPassword;
-        }else{
-            return null;
         }
+        return byEmailAndPassword;
     }
 
     @Override

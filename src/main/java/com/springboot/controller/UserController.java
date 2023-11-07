@@ -109,7 +109,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/saveUpdateUser")
-    public String updateProfile(@RequestParam("removedAddressIds") String addressDeleteIds, User user,Address address) {
+    public String updateProfile(@RequestParam("removedAddressIds") String addressDeleteIds, User user,Address address,Model model) {
         if(session.getAttribute("username")!=null){
             long id = user.getUser_id();
             boolean status = userService.updateUser(user, address);
