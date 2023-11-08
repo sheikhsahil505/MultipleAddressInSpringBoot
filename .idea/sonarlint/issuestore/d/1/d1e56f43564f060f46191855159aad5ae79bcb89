@@ -1,0 +1,17 @@
+
+l
+java:S1192>"JDefine a constant instead of duplicating this literal "userEmail" 3 times.(°óïóúÿÿÿÿ8ö•Ğ£¸1
+k
+java:S1192<"IDefine a constant instead of duplicating this literal "username" 3 times.(‚­Ó¡úÿÿÿÿ8ßŞ¸ş·1
+y
+java:S1488Q"\Immediately return this expression instead of assigning it to the temporary variable "user".(½üÙê8áŞ¸ş·1
+c
+java:S2789]"FEnsure this "Optional" could never be null and remove this null-check.(Ë—åŒ8ãŞ¸ş·1
+e
+java:S3655^"HCall "byId.isPresent()" or "!byId.isEmpty()" before accessing the value.(öÔŸÍ8õß¸ş·1
+{
+java:S3655p"^Call "existingAddress.isPresent()" or "!existingAddress.isEmpty()" before accessing the value.(ÌÌ¥»8õß¸ş·1
+T
+java:S2589]"7Remove this expression which always evaluates to "true"(Ë—åŒ8õß¸ş·1
+o
+java:S3776V"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.( ì±8…à¸ş·1

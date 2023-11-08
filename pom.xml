@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springboot</groupId>
-	<artifactId>SpringBootTask</artifactId>
+	<artifactId>SpringBootTaskWithFlyWay</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBootTask</name>
 	<description>Demo project for Spring Boot</description>
@@ -101,7 +101,14 @@
 			<version>2.0.9</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

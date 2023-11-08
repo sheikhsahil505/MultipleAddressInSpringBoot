@@ -1,0 +1,27 @@
+
+l
+java:S11929"JDefine a constant instead of duplicating this literal "addresses" 7 times.(ç‡¯Ãşÿÿÿÿ8Çü‹œº1
+k
+java:S1192:"NDefine a constant instead of duplicating this literal "registrations" 5 times.(¬Áîñ8Íü‹œº1
+j
+java:S1192;"HDefine a constant instead of duplicating this literal "profile" 7 times.(ıáôöÿÿÿÿÿ8Îü‹œº1
+i
+java:S1192"LDefine a constant instead of duplicating this literal "newRegister" 3 times.(Ñ³Ãã8Îü‹œº1
+j
+java:S1192,"MDefine a constant instead of duplicating this literal "errorMessage" 4 times.(èØ•Œ8Îü‹œº1
+b
+java:S1192"FDefine a constant instead of duplicating this literal "index" 9 times.(õ§8Îü‹œº1
+e
+java:S1192D"IDefine a constant instead of duplicating this literal "username" 5 times.(õÈîA8Ïü‹œº1
+b
+java:S4684&"@Replace this persistent entity with a simple POJO or DTO object.(¤‘Ìşúÿÿÿÿ8ƒı‹œº1
+b
+java:S4684&"@Replace this persistent entity with a simple POJO or DTO object.(¤‘Ìşúÿÿÿÿ8„ı‹œº1
+\
+java:S46844"@Replace this persistent entity with a simple POJO or DTO object.(Şæß|8‡ı‹œº1
+]
+java:S4684p"@Replace this persistent entity with a simple POJO or DTO object.(µñÕÚ8ı‹œº1
+]
+java:S4684p"@Replace this persistent entity with a simple POJO or DTO object.(µñÕÚ8ı‹œº1
+Q
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ã®“ º1

@@ -1,0 +1,9 @@
+
+X	java:S125*"<This block of commented-out lines of code should be removed.(¸äÓˆ8©êˆ¡¹1
+^
+java:S11266"AReplace this if-then-else statement by a single return statement.(™‰†Û8‡äá¹1
+W
+java:S1128	"5Remove this unused import 'java.nio.charset.Charset'.(ü¶ØŸıÿÿÿÿ8±´ã¹1
+J
+java:S1128
+"-Remove this unused import 'java.util.Base64'.(ëŠ»Õ8±´ã¹1
