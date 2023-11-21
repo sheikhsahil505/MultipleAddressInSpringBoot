@@ -1,0 +1,18 @@
+security:
+  oauth2:
+    client:
+      clientId: 1065636627036-2o91pb8cgjt6ik48ibh8hdlmdsuqidh3.apps.googleusercontent.com
+      clientSecret: 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
+      accessTokenUri: https://accounts.google.com/o/oauth2/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+      clientAuthenticationScheme: form
+      scope:
+        - openid
+        - profile
+        - email
+    resource:
+      user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+      prefer-token-info: false
+
+server:
+  port: 5236

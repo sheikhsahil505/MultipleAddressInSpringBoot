@@ -4,17 +4,19 @@ import com.springboot.model.Address;
 import com.springboot.model.User;
 import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
+@EnableOAuth2Sso
 public class UserController {
     @Autowired
     private UserService userService;
@@ -48,8 +50,12 @@ public class UserController {
         }
                 return "newRegister";
     }
-    @PostMapping(value = "/login")
-    public String login(User user,Model model){
+    @GetMapping("/")
+    public String login(OAuth2Authentication authentication,Model model) {
+        LinkedHashMap<String, Object> details = (LinkedHashMap<String, Object>) authentication.getUserAuthentication().getDetails();
+        String email = (String)details.get("email");
+        User user = new User();
+        user.setEmail(email);
         User login = userService.login(user);
         if(login!=null){
             List<User> all = userService.findAll();
@@ -135,7 +141,7 @@ public class UserController {
             }
 }
     @PostMapping(value = "/deleteUser")
-    public String deleteUSer(@RequestParam("user_id") long id){
+    public String deleteUSer(@RequestParam("user_id") long id,Model model){
         if(session.getAttribute("username")!=null){
             userService.deleteUser(id);
             User home = userService.home();
